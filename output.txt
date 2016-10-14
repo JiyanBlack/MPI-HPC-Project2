@@ -1,8 +1,976 @@
-MPI_MAX_PROCESSOR_NAME = 256Core 156 begin to allocate memory...Core 156 memory allocation done!Col 310 has signatures 1
-MPI_MAX_PROCESSOR_NAME = 256Core 96 begin to allocate memory...Core 96 memory allocation done!Col 190 has signatures 1
-MPI_MAX_PROCESSOR_NAME = 256Core 72 begin to allocate memory...Core 72 memory allocation done!Col 142 has signatures 1
-MPI_MAX_PROCESSOR_NAME = 256Core 240 begin to allocate memory...Core 240 memory allocation done!Col 478 has signatures 1
---------------------------------------------------------------------------
-mpirun noticed that process rank 193 with PID 0 on node node-17 exited on signal 11 (Segmentation fault).
---------------------------------------------------------------------------
-83 total processes killed (some possibly by mpirun during cleanup)
+Syncing to node-1
+Syncing to node-2
+Syncing to node-3
+Syncing to node-4
+Syncing to node-5
+Syncing to node-6
+Syncing to node-7
+Syncing to node-8
+Syncing to node-9
+Syncing to node-10
+Syncing to node-11
+Syncing to node-12
+Syncing to node-13
+Syncing to node-14
+Syncing to node-15
+Syncing to node-16
+Syncing to node-17
+Syncing to node-18
+Syncing to node-19
+Syncing to node-20
+Syncing to node-21
+Syncing to node-22
+Syncing to node-23
+Syncing to node-24
+Syncing to node-25
+Syncing to node-26
+Syncing to node-27
+Syncing to node-28
+Syncing to node-29
+Start to run the program...
+Core 5 begin to allocate memory...
+Allocating for col 168
+Core 1 begin to allocate memory...
+Allocating for col 0
+Core 9 begin to allocate memory...
+Allocating for col 336
+Core 6 begin to allocate memory...
+Allocating for col 210
+Core 2 begin to allocate memory...
+Allocating for col 42
+Core 10 begin to allocate memory...
+Allocating for col 378
+Core 11 begin to allocate memory...
+Allocating for col 420
+Core 7 begin to allocate memory...
+Allocating for col 252
+Core 4 begin to allocate memory...
+Allocating for col 126
+Core 3 begin to allocate memory...
+Allocating for col 84
+Core 8 begin to allocate memory...
+Allocating for col 294
+Allocating for col 1
+0 is received by master
+Allocating for col 169
+Allocating for col 379
+Allocating for col 337
+Allocating for col 211
+Allocating for col 43
+Allocating for col 421
+Allocating for col 253
+Allocating for col 127
+Allocating for col 295
+Allocating for col 85
+Allocating for col 170
+Allocating for col 380
+Allocating for col 2
+1 is received by master
+Allocating for col 338
+Allocating for col 44
+Allocating for col 212
+Allocating for col 422
+Allocating for col 254
+Allocating for col 296
+Allocating for col 86
+Allocating for col 128
+Allocating for col 171
+Allocating for col 381
+Allocating for col 3
+2 is received by master
+Allocating for col 339
+Allocating for col 45
+Allocating for col 213
+Allocating for col 423
+Allocating for col 297
+Allocating for col 255
+Allocating for col 129
+Allocating for col 87
+Allocating for col 172
+Allocating for col 4
+3 is received by master
+Allocating for col 382
+Allocating for col 46
+Allocating for col 214
+Allocating for col 340
+Allocating for col 424
+Allocating for col 130
+Allocating for col 256
+Allocating for col 88
+Allocating for col 298
+Allocating for col 173
+4 is received by master
+Allocating for col 5
+Allocating for col 383
+Allocating for col 47
+Allocating for col 215
+Allocating for col 341
+Allocating for col 425
+Allocating for col 131
+Allocating for col 89
+Allocating for col 299
+Allocating for col 257
+Allocating for col 174
+Allocating for col 6
+5 is received by master
+Allocating for col 384
+Allocating for col 48
+Allocating for col 216
+Allocating for col 342
+Allocating for col 426
+Allocating for col 132
+Allocating for col 90
+Allocating for col 300
+Allocating for col 258
+Allocating for col 175
+Allocating for col 385
+Allocating for col 49
+6 is received by master
+Allocating for col 7
+Allocating for col 217
+Allocating for col 343
+Allocating for col 427
+Allocating for col 133
+Allocating for col 91
+Allocating for col 301
+Allocating for col 259
+Allocating for col 176
+Allocating for col 386
+Allocating for col 50
+7 is received by master
+Allocating for col 8
+Allocating for col 218
+Allocating for col 344
+Allocating for col 428
+Allocating for col 134
+Allocating for col 92
+Allocating for col 302
+Allocating for col 260
+Allocating for col 177
+Allocating for col 387
+Allocating for col 51
+Allocating for col 9
+8 is received by master
+Allocating for col 219
+Allocating for col 345
+Allocating for col 429
+Allocating for col 135
+Allocating for col 93
+Allocating for col 303
+Allocating for col 261
+Allocating for col 178
+Allocating for col 388
+Allocating for col 52
+9 is received by master
+Allocating for col 10
+Allocating for col 346
+Allocating for col 220
+Allocating for col 430
+Allocating for col 136
+Allocating for col 94
+Allocating for col 304
+Allocating for col 262
+Allocating for col 53
+Allocating for col 179
+Allocating for col 389
+Allocating for col 11
+10 is received by master
+Allocating for col 347
+Allocating for col 221
+Allocating for col 431
+Allocating for col 137
+Allocating for col 95
+Allocating for col 305
+Allocating for col 263
+Allocating for col 54
+Allocating for col 180
+Allocating for col 390
+11 is received by master
+Allocating for col 12
+Allocating for col 222
+Allocating for col 348
+Allocating for col 432
+Allocating for col 138
+Allocating for col 96
+Allocating for col 306
+Allocating for col 264
+Allocating for col 181
+Allocating for col 55
+Allocating for col 13
+12 is received by master
+Allocating for col 391
+Allocating for col 349
+Allocating for col 223
+Allocating for col 433
+Allocating for col 139
+Allocating for col 97
+Allocating for col 307
+Allocating for col 265
+Allocating for col 182
+Allocating for col 56
+Allocating for col 14
+13 is received by master
+Allocating for col 392
+Allocating for col 350
+Allocating for col 224
+Allocating for col 434
+Allocating for col 140
+Allocating for col 98
+Allocating for col 308
+Allocating for col 266
+Allocating for col 183
+Allocating for col 57
+Allocating for col 15
+14 is received by master
+Allocating for col 393
+Allocating for col 225
+Allocating for col 351
+Allocating for col 435
+Allocating for col 141
+Allocating for col 99
+Allocating for col 309
+Allocating for col 267
+Allocating for col 184
+Allocating for col 16
+15 is received by master
+Allocating for col 58
+Allocating for col 394
+Allocating for col 226
+Allocating for col 352
+Allocating for col 436
+Allocating for col 142
+Allocating for col 100
+Allocating for col 310
+Allocating for col 268
+Allocating for col 17
+16 is received by master
+Allocating for col 185
+Allocating for col 395
+Allocating for col 59
+Allocating for col 227
+Allocating for col 353
+Allocating for col 437
+Allocating for col 143
+Allocating for col 311
+Allocating for col 101
+Allocating for col 269
+Allocating for col 186
+17 is received by master
+Allocating for col 18
+Allocating for col 60
+Allocating for col 396
+Allocating for col 228
+Allocating for col 354
+Allocating for col 438
+Allocating for col 144
+Allocating for col 312
+Allocating for col 102
+Allocating for col 270
+Allocating for col 187
+18 is received by master
+Allocating for col 19
+Allocating for col 61
+Allocating for col 397
+Allocating for col 229
+Allocating for col 355
+Allocating for col 439
+Allocating for col 145
+Allocating for col 313
+Allocating for col 103
+Allocating for col 271
+Allocating for col 62
+Allocating for col 20
+19 is received by master
+Allocating for col 188
+Allocating for col 398
+Allocating for col 230
+Allocating for col 356
+Allocating for col 440
+Allocating for col 146
+Allocating for col 314
+Allocating for col 104
+Allocating for col 272
+Allocating for col 189
+Allocating for col 63
+Allocating for col 21
+20 is received by master
+Allocating for col 399
+Allocating for col 357
+Allocating for col 231
+Allocating for col 441
+Allocating for col 147
+Allocating for col 315
+Allocating for col 105
+Allocating for col 273
+Allocating for col 190
+Allocating for col 22
+21 is received by master
+Allocating for col 64
+Allocating for col 400
+Allocating for col 232
+Allocating for col 358
+Allocating for col 442
+Allocating for col 148
+Allocating for col 316
+Allocating for col 106
+Allocating for col 274
+Allocating for col 191
+Allocating for col 23
+22 is received by master
+Allocating for col 65
+Allocating for col 401
+Allocating for col 233
+Allocating for col 359
+Allocating for col 443
+Allocating for col 317
+Allocating for col 149
+Allocating for col 107
+Allocating for col 275
+Allocating for col 192
+Allocating for col 66
+23 is received by master
+Allocating for col 24
+Allocating for col 402
+Allocating for col 360
+Allocating for col 234
+Allocating for col 444
+Allocating for col 318
+Allocating for col 150
+Allocating for col 108
+Allocating for col 276
+Allocating for col 67
+Allocating for col 193
+24 is received by master
+Allocating for col 25
+Allocating for col 403
+Allocating for col 361
+Allocating for col 235
+Allocating for col 445
+Allocating for col 319
+Allocating for col 151
+Allocating for col 109
+Allocating for col 277
+25 is received by master
+Allocating for col 26
+Allocating for col 194
+Allocating for col 68
+Allocating for col 404
+Allocating for col 362
+Allocating for col 236
+Allocating for col 320
+Allocating for col 446
+Allocating for col 152
+Allocating for col 110
+Allocating for col 278
+Allocating for col 195
+Allocating for col 27
+26 is received by master
+Allocating for col 69
+Allocating for col 405
+Allocating for col 363
+Allocating for col 237
+Allocating for col 321
+Allocating for col 447
+Allocating for col 153
+Allocating for col 111
+Allocating for col 279
+Allocating for col 196
+Allocating for col 70
+Allocating for col 28
+27 is received by master
+Allocating for col 406
+Allocating for col 364
+Allocating for col 238
+Allocating for col 322
+Allocating for col 448
+Allocating for col 154
+Allocating for col 112
+Allocating for col 280
+Allocating for col 197
+Allocating for col 71
+Allocating for col 29
+28 is received by master
+Allocating for col 239
+Allocating for col 407
+Allocating for col 365
+Allocating for col 323
+Allocating for col 449
+Allocating for col 155
+Allocating for col 113
+Allocating for col 281
+Allocating for col 198
+Allocating for col 72
+29 is received by master
+Allocating for col 30
+Allocating for col 408
+Allocating for col 240
+Allocating for col 366
+Allocating for col 324
+Allocating for col 450
+Allocating for col 156
+Allocating for col 114
+Allocating for col 282
+Allocating for col 73
+Allocating for col 199
+Allocating for col 31
+30 is received by master
+Allocating for col 409
+Allocating for col 241
+Allocating for col 367
+Allocating for col 325
+Allocating for col 451
+Allocating for col 157
+Allocating for col 115
+Allocating for col 283
+Allocating for col 200
+Allocating for col 32
+31 is received by master
+Allocating for col 74
+Allocating for col 242
+Allocating for col 410
+Allocating for col 368
+Allocating for col 326
+Allocating for col 452
+Allocating for col 158
+Allocating for col 116
+Allocating for col 284
+Allocating for col 201
+32 is received by master
+Allocating for col 33
+Allocating for col 75
+Allocating for col 243
+Allocating for col 411
+Allocating for col 369
+Allocating for col 327
+Allocating for col 453
+Allocating for col 159
+Allocating for col 117
+Allocating for col 285
+Allocating for col 202
+Allocating for col 34
+33 is received by master
+Allocating for col 76
+Allocating for col 244
+Allocating for col 412
+Allocating for col 370
+Allocating for col 328
+Allocating for col 454
+Allocating for col 160
+Allocating for col 118
+Allocating for col 286
+Allocating for col 77
+Allocating for col 203
+Allocating for col 35
+34 is received by master
+Allocating for col 245
+Allocating for col 371
+Allocating for col 413
+Allocating for col 329
+Allocating for col 455
+Allocating for col 161
+Allocating for col 119
+Allocating for col 287
+Allocating for col 36
+35 is received by master
+Allocating for col 78
+Allocating for col 204
+Allocating for col 246
+Allocating for col 372
+Allocating for col 414
+Allocating for col 330
+Allocating for col 456
+Allocating for col 162
+Allocating for col 120
+Allocating for col 288
+Allocating for col 37
+36 is received by master
+Allocating for col 205
+Allocating for col 79
+Allocating for col 247
+Allocating for col 373
+Allocating for col 415
+Allocating for col 331
+Allocating for col 457
+Allocating for col 163
+Allocating for col 121
+Allocating for col 289
+Allocating for col 206
+Allocating for col 80
+Allocating for col 38
+37 is received by master
+Allocating for col 248
+Allocating for col 416
+Allocating for col 374
+Allocating for col 332
+Allocating for col 458
+Allocating for col 164
+Allocating for col 122
+Allocating for col 290
+Allocating for col 207
+Allocating for col 81
+Allocating for col 39
+38 is received by master
+Allocating for col 249
+Allocating for col 417
+Allocating for col 375
+Allocating for col 333
+Allocating for col 459
+Allocating for col 123
+Allocating for col 165
+Allocating for col 291
+Allocating for col 208
+Allocating for col 82
+Allocating for col 40
+39 is received by master
+Allocating for col 250
+Allocating for col 376
+Allocating for col 418
+Allocating for col 334
+Allocating for col 460
+Allocating for col 124
+Allocating for col 166
+Allocating for col 292
+Allocating for col 209
+Allocating for col 83
+40 is received by master
+Allocating for col 41
+Allocating for col 377
+Allocating for col 251
+Allocating for col 419
+Allocating for col 335
+Allocating for col 461
+Allocating for col 125
+Allocating for col 167
+Allocating for col 293
+5 start to receiving signature_number[]
+1 start to receiving signature_number[]
+41 is received by master
+42 is received by master
+43 is received by master
+44 is received by master
+45 is received by master
+46 is received by master
+47 is received by master
+48 is received by master
+49 is received by master
+50 is received by master
+51 is received by master
+52 is received by master
+53 is received by master
+54 is received by master
+55 is received by master
+56 is received by master
+57 is received by master
+58 is received by master
+59 is received by master
+2 start to receiving signature_number[]
+60 is received by master
+61 is received by master
+62 is received by master
+63 is received by master
+64 is received by master
+65 is received by master
+66 is received by master
+67 is received by master
+68 is received by master
+69 is received by master
+70 is received by master
+71 is received by master
+72 is received by master
+73 is received by master
+74 is received by master
+75 is received by master
+76 is received by master
+77 is received by master
+78 is received by master
+79 is received by master
+80 is received by master
+81 is received by master
+82 is received by master
+83 is received by master
+84 is received by master
+85 is received by master
+86 is received by master
+87 is received by master
+88 is received by master
+89 is received by master
+90 is received by master
+91 is received by master
+92 is received by master
+93 is received by master
+94 is received by master
+95 is received by master
+96 is received by master
+97 is received by master
+98 is received by master
+99 is received by master
+100 is received by master
+101 is received by master
+102 is received by master
+103 is received by master
+104 is received by master
+105 is received by master
+106 is received by master
+107 is received by master
+108 is received by master
+109 is received by master
+110 is received by master
+111 is received by master
+112 is received by master
+113 is received by master
+114 is received by master
+115 is received by master
+116 is received by master
+117 is received by master
+118 is received by master
+119 is received by master
+120 is received by master
+121 is received by master
+122 is received by master
+123 is received by master
+124 is received by master
+9 start to receiving signature_number[]
+6 start to receiving signature_number[]
+10 start to receiving signature_number[]
+8 start to receiving signature_number[]
+11 start to receiving signature_number[]
+3 start to receiving signature_number[]
+125 is received by master
+126 is received by master
+127 is received by master
+128 is received by master
+129 is received by master
+130 is received by master
+131 is received by master
+132 is received by master
+133 is received by master
+134 is received by master
+135 is received by master
+136 is received by master
+137 is received by master
+138 is received by master
+139 is received by master
+140 is received by master
+141 is received by master
+142 is received by master
+143 is received by master
+144 is received by master
+145 is received by master
+146 is received by master
+147 is received by master
+148 is received by master
+149 is received by master
+150 is received by master
+151 is received by master
+152 is received by master
+153 is received by master
+154 is received by master
+155 is received by master
+156 is received by master
+157 is received by master
+158 is received by master
+159 is received by master
+160 is received by master
+161 is received by master
+162 is received by master
+163 is received by master
+164 is received by master
+165 is received by master
+166 is received by master
+4 start to receiving signature_number[]
+167 is received by master
+168 is received by master
+169 is received by master
+170 is received by master
+171 is received by master
+172 is received by master
+173 is received by master
+174 is received by master
+175 is received by master
+176 is received by master
+177 is received by master
+178 is received by master
+179 is received by master
+180 is received by master
+181 is received by master
+182 is received by master
+183 is received by master
+184 is received by master
+185 is received by master
+186 is received by master
+187 is received by master
+188 is received by master
+189 is received by master
+190 is received by master
+191 is received by master
+192 is received by master
+193 is received by master
+194 is received by master
+195 is received by master
+196 is received by master
+197 is received by master
+198 is received by master
+199 is received by master
+200 is received by master
+201 is received by master
+202 is received by master
+203 is received by master
+204 is received by master
+205 is received by master
+206 is received by master
+207 is received by master
+208 is received by master
+209 is received by master
+210 is received by master
+211 is received by master
+212 is received by master
+213 is received by master
+214 is received by master
+215 is received by master
+216 is received by master
+217 is received by master
+218 is received by master
+219 is received by master
+220 is received by master
+221 is received by master
+222 is received by master
+223 is received by master
+224 is received by master
+225 is received by master
+226 is received by master
+227 is received by master
+228 is received by master
+229 is received by master
+230 is received by master
+231 is received by master
+232 is received by master
+233 is received by master
+234 is received by master
+235 is received by master
+236 is received by master
+237 is received by master
+238 is received by master
+239 is received by master
+240 is received by master
+241 is received by master
+242 is received by master
+243 is received by master
+244 is received by master
+245 is received by master
+246 is received by master
+247 is received by master
+248 is received by master
+249 is received by master
+250 is received by master
+251 is received by master
+252 is received by master
+253 is received by master
+254 is received by master
+255 is received by master
+256 is received by master
+257 is received by master
+258 is received by master
+259 is received by master
+260 is received by master
+261 is received by master
+262 is received by master
+263 is received by master
+264 is received by master
+265 is received by master
+266 is received by master
+267 is received by master
+268 is received by master
+269 is received by master
+270 is received by master
+271 is received by master
+272 is received by master
+273 is received by master
+274 is received by master
+275 is received by master
+276 is received by master
+277 is received by master
+278 is received by master
+279 is received by master
+280 is received by master
+281 is received by master
+282 is received by master
+283 is received by master
+284 is received by master
+285 is received by master
+286 is received by master
+287 is received by master
+288 is received by master
+289 is received by master
+290 is received by master
+291 is received by master
+292 is received by master
+293 is received by master
+294 is received by master
+295 is received by master
+296 is received by master
+7 start to receiving signature_number[]
+297 is received by master
+298 is received by master
+299 is received by master
+300 is received by master
+301 is received by master
+302 is received by master
+303 is received by master
+304 is received by master
+305 is received by master
+306 is received by master
+307 is received by master
+308 is received by master
+309 is received by master
+310 is received by master
+311 is received by master
+312 is received by master
+313 is received by master
+314 is received by master
+315 is received by master
+316 is received by master
+317 is received by master
+318 is received by master
+319 is received by master
+320 is received by master
+321 is received by master
+322 is received by master
+323 is received by master
+324 is received by master
+325 is received by master
+326 is received by master
+327 is received by master
+328 is received by master
+329 is received by master
+330 is received by master
+331 is received by master
+332 is received by master
+333 is received by master
+334 is received by master
+335 is received by master
+336 is received by master
+337 is received by master
+338 is received by master
+339 is received by master
+340 is received by master
+341 is received by master
+342 is received by master
+343 is received by master
+344 is received by master
+345 is received by master
+346 is received by master
+347 is received by master
+348 is received by master
+349 is received by master
+350 is received by master
+351 is received by master
+352 is received by master
+353 is received by master
+354 is received by master
+355 is received by master
+356 is received by master
+357 is received by master
+358 is received by master
+359 is received by master
+360 is received by master
+361 is received by master
+362 is received by master
+363 is received by master
+364 is received by master
+365 is received by master
+366 is received by master
+367 is received by master
+368 is received by master
+369 is received by master
+370 is received by master
+371 is received by master
+372 is received by master
+373 is received by master
+374 is received by master
+375 is received by master
+376 is received by master
+377 is received by master
+378 is received by master
+379 is received by master
+380 is received by master
+381 is received by master
+382 is received by master
+383 is received by master
+384 is received by master
+385 is received by master
+386 is received by master
+387 is received by master
+388 is received by master
+389 is received by master
+390 is received by master
+391 is received by master
+392 is received by master
+393 is received by master
+394 is received by master
+395 is received by master
+396 is received by master
+397 is received by master
+398 is received by master
+399 is received by master
+400 is received by master
+401 is received by master
+402 is received by master
+403 is received by master
+404 is received by master
+405 is received by master
+406 is received by master
+407 is received by master
+408 is received by master
+409 is received by master
+410 is received by master
+411 is received by master
+412 is received by master
+413 is received by master
+414 is received by master
+415 is received by master
+416 is received by master
+417 is received by master
+418 is received by master
+419 is received by master
+420 is received by master
+421 is received by master
+422 is received by master
+423 is received by master
+424 is received by master
+425 is received by master
+426 is received by master
+427 is received by master
+428 is received by master
+429 is received by master
+430 is received by master
+431 is received by master
+432 is received by master
+433 is received by master
+434 is received by master
+435 is received by master
+436 is received by master
+437 is received by master
+438 is received by master
+439 is received by master
+440 is received by master
+441 is received by master
+442 is received by master
+443 is received by master
+444 is received by master
+445 is received by master
+446 is received by master
+447 is received by master
+448 is received by master
+449 is received by master
+450 is received by master
+451 is received by master
+452 is received by master
+453 is received by master
+454 is received by master
+455 is received by master
+456 is received by master
+457 is received by master
+458 is received by master
+459 is received by master
+460 is received by master
+461 is received by master

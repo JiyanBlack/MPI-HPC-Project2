@@ -71,11 +71,10 @@ int main(void)
     //read data:
     readData();
     readKeys();
-    int col_each_task = (int)(500 / numtasks) + 1;
+    int col_each_task = (int)(500 / (numtasks - 1)) + 1;
     if (taskid != 0)
     {
         //allocate memory for the blocks of each column and sending to MASTER
-        printf("Core %d begin to allocate memory...\n", taskid);
         for (int col = (taskid - 1) * col_each_task; col < taskid * col_each_task && col < 500; col++)
         {
             individual_index = allocateMemory(col);
@@ -84,6 +83,7 @@ int main(void)
                 printf("%d: Send index failure\n", taskid);
         }
         //receiving signature_number and start_point array
+        // printf("%d start to receiving signature_number[]\n", taskid);
         rc = MPI_Recv(&signature_number, 500, MPI_LONG, 0, 501, MPI_COMM_WORLD, &status);
         if (rc != MPI_SUCCESS)
             printf("%d: Receive signature_number failure\n", taskid);
@@ -100,6 +100,7 @@ int main(void)
             if (rc != MPI_SUCCESS)
                 printf("%d: Receive index failure\n", taskid);
             signature_number[col] = individual_index;
+            // printf("%d is received by master,value %ld\n", col, signature_number[col]);
         }
         for (int i = 0; i < 500; i++)
         {
@@ -124,6 +125,7 @@ int main(void)
         }
         printf("Allocation memory and syncing memory indexes for blocks done!\n");
     }
+
     MPI_Barrier(MPI_COMM_WORLD);
     //calculate signatures and sync to the master cluster
     if (taskid == 0)
@@ -132,25 +134,27 @@ int main(void)
         {
             // receiving result arrays from other nodes
             long signature_num_this_col = signature_number[col];
+            if (signature_num_this_col == 0)
+                continue;
             long *local_signatures = new long[signature_num_this_col];     //local signatures of all rows in a one-dimensinal array
             int *local_signatures_one = new int[signature_num_this_col];   //locally record the first element of each block
             int *local_signatures_two = new int[signature_num_this_col];   //locally record the second element of each block
             int *local_signatures_three = new int[signature_num_this_col]; //locally record the third element of each block
             int *local_signatures_four = new int[signature_num_this_col];  //locally record the fourth element of each block
 
-            rc = MPI_Recv(&local_signatures, signature_num_this_col, MPI_LONG, MPI_ANY_SOURCE, col * 10 + 0, MPI_COMM_WORLD, &status);
+            rc = MPI_Recv(&local_signatures, signature_num_this_col, MPI_LONG, MPI_ANY_SOURCE, col * 1000 + 0, MPI_COMM_WORLD, &status);
             if (rc != MPI_SUCCESS)
                 printf("%d: Receive index failure\n", taskid);
-            rc = MPI_Recv(&local_signatures_one, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 10 + 1, MPI_COMM_WORLD, &status);
+            rc = MPI_Recv(&local_signatures_one, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 1000 + 1, MPI_COMM_WORLD, &status);
             if (rc != MPI_SUCCESS)
                 printf("%d: Receive index failure\n", taskid);
-            rc = MPI_Recv(&local_signatures_two, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 10 + 2, MPI_COMM_WORLD, &status);
+            rc = MPI_Recv(&local_signatures_two, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 1000 + 2, MPI_COMM_WORLD, &status);
             if (rc != MPI_SUCCESS)
                 printf("%d: Receive index failure\n", taskid);
-            rc = MPI_Recv(&local_signatures_three, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 10 + 3, MPI_COMM_WORLD, &status);
+            rc = MPI_Recv(&local_signatures_three, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 1000 + 3, MPI_COMM_WORLD, &status);
             if (rc != MPI_SUCCESS)
                 printf("%d: Receive index failure\n", taskid);
-            rc = MPI_Recv(&local_signatures_four, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 10 + 4, MPI_COMM_WORLD, &status);
+            rc = MPI_Recv(&local_signatures_four, signature_num_this_col, MPI_INT, MPI_ANY_SOURCE, col * 1000 + 4, MPI_COMM_WORLD, &status);
             if (rc != MPI_SUCCESS)
                 printf("%d: Receive index failure\n", taskid);
             for (int i = 0; i < signature_num_this_col; i++)
@@ -165,25 +169,28 @@ int main(void)
         {
             //sending the arrays to the master node
             long signature_num_this_col = signature_number[col];
+            if (signature_num_this_col == 0)
+                continue;
+            printf("%d at node %d,length: %ld\n", col, taskid, signature_num_this_col);
             long *signatures = new long[signature_num_this_col];     //signatures of all rows in a one-dimensinal array
             int *signatures_one = new int[signature_num_this_col];   //record the first element of each block
             int *signatures_two = new int[signature_num_this_col];   //record the second element of each block
             int *signatures_three = new int[signature_num_this_col]; //record the third element of each block
             int *signatures_four = new int[signature_num_this_col];  //record the fourth element of each block
             calcSignatures(col, signatures, signatures_one, signatures_two, signatures_three, signatures_four);
-            rc = MPI_Send(&signatures, signature_num_this_col, MPI_LONG, 0, col * 10 + 0, MPI_COMM_WORLD);
+            rc = MPI_Send(&signatures, signature_num_this_col, MPI_LONG, 0, col * 1000 + 0, MPI_COMM_WORLD);
             if (rc != MPI_SUCCESS)
                 printf("%d: Send '*signatures' failure\n", taskid);
-            rc = MPI_Send(&signatures_one, signature_num_this_col, MPI_INT, 0, col * 10 + 1, MPI_COMM_WORLD);
+            rc = MPI_Send(&signatures_one, signature_num_this_col, MPI_INT, 0, col * 1000 + 1, MPI_COMM_WORLD);
             if (rc != MPI_SUCCESS)
                 printf("%d: Send '*signatures' failure\n", taskid);
-            rc = MPI_Send(&signatures_two, signature_num_this_col, MPI_INT, 0, col * 10 + 2, MPI_COMM_WORLD);
+            rc = MPI_Send(&signatures_two, signature_num_this_col, MPI_INT, 0, col * 1000 + 2, MPI_COMM_WORLD);
             if (rc != MPI_SUCCESS)
                 printf("%d: Send '*signatures' failure\n", taskid);
-            rc = MPI_Send(&signatures_three, signature_num_this_col, MPI_INT, 0, col * 10 + 3, MPI_COMM_WORLD);
+            rc = MPI_Send(&signatures_three, signature_num_this_col, MPI_INT, 0, col * 1000 + 3, MPI_COMM_WORLD);
             if (rc != MPI_SUCCESS)
                 printf("%d: Send '*signatures' failure\n", taskid);
-            rc = MPI_Send(&signatures_four, signature_num_this_col, MPI_INT, 0, col * 10 + 4, MPI_COMM_WORLD);
+            rc = MPI_Send(&signatures_four, signature_num_this_col, MPI_INT, 0, col * 1000 + 4, MPI_COMM_WORLD);
             if (rc != MPI_SUCCESS)
                 printf("%d: Send '*signatures' failure\n", taskid);
         }
@@ -317,7 +324,7 @@ void calcSignatures(int col, long *signatures, int *signatures_one, int *signatu
                 }
             }
         }
-        printf("Col %d has signatures %d\n", col, index);
+        // printf("Col %d has signatures %d\n", col, index);
     }
 }
 
@@ -336,6 +343,7 @@ int isInArray(int array[], int value)
 long allocateMemory(int col)
 {
     //generate neighbours for each row in each col
+    printf("Allocating for col %d\n", col);
     int col_neighbours[4400][200];
     int exist_neighbours = 0;
     for (int row = 0; row < 4400; row++)
