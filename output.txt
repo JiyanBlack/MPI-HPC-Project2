@@ -1,0 +1,8 @@
+MPI_MAX_PROCESSOR_NAME = 256Core 156 begin to allocate memory...Core 156 memory allocation done!Col 310 has signatures 1
+MPI_MAX_PROCESSOR_NAME = 256Core 96 begin to allocate memory...Core 96 memory allocation done!Col 190 has signatures 1
+MPI_MAX_PROCESSOR_NAME = 256Core 72 begin to allocate memory...Core 72 memory allocation done!Col 142 has signatures 1
+MPI_MAX_PROCESSOR_NAME = 256Core 240 begin to allocate memory...Core 240 memory allocation done!Col 478 has signatures 1
+--------------------------------------------------------------------------
+mpirun noticed that process rank 193 with PID 0 on node node-17 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+83 total processes killed (some possibly by mpirun during cleanup)

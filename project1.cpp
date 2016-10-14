@@ -29,7 +29,7 @@ void readKeys();
 void getBlocks(int col);
 int isNeighbour(int i, int j, int col);
 void printCol(int col);
-void calcSignatures(int col);
+void calcSignatures(int col, long *signatures, int *signatures_one, int *signatures_two, int *signatures_three, int *signatures_four);
 long getOneSignature(int row1, int row2, int row3, int row4);
 void setSignature(int col, int index, long value, int one, int two, int three, int four);
 long getStartPoint(int col);
@@ -62,45 +62,70 @@ static FILE *log_txt;
 
 int main(void)
 {
-    //control the main work flow
-    result_txt = fopen("./result.txt", "w+");
-    log_txt = fopen("./log.txt", "w+");
-    //read data:
-    readData();
-    readKeys();
-    //omp section start
-    omp_set_num_threads(core_number); //set thread number
-//start parallel computing to calculate signatures for each column
-#pragma omp parallel
-    {
-#pragma omp for
-        for (int col = 499; col >= 0; col--)
-        {
-            //allocate memory for the blocks of each column
-            allocateMemory(col);
-        }
-    }
-    for (int i = 0; i < 500; i++)
-    {
-        long result = 0;
-        for (int j = 0; j < i; j++)
-        {
-            result += signature_number[j];
-        }
-        start_point[i] = result;
-    }
-    // MPI_Barrier(MPI_COMM_WORLD);
-    //MPI begin, run by all tasks
-    int numtasks, taskid, len;
+    int numtasks, taskid, len, rc;
     char hostname[MPI_MAX_PROCESSOR_NAME];
-    printf("MPI_MAX_PROCESSOR_NAME = %d", MPI_MAX_PROCESSOR_NAME);
     int partner, message;
     MPI_Status status;
-    MPI_Init(&argc, &argv);
+    MPI_Init(NULL, NULL);
     MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
     MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
     MPI_Get_processor_name(hostname, &len);
-    printf("Running from task %d on %s!\n", taskid, hostname);
+    if (taskid % 12 == 0)
+    {
+        //control the main work flow
+        result_txt = fopen("./result.txt", "w+");
+        log_txt = fopen("./log.txt", "w+");
+        //read data:
+        readData();
+        readKeys();
+        //omp section start
+        omp_set_num_threads(core_number); //set thread number
+        printf("Core %d begin to allocate memory...", taskid);
+#pragma omp parallel
+        {
+#pragma omp for
+            for (int col = 499; col >= 0; col--)
+            {
+                //allocate memory for the blocks of each column
+                allocateMemory(col);
+            }
+        }
+        for (int i = 0; i < 500; i++)
+        {
+            long result = 0;
+            for (int j = 0; j < i; j++)
+            {
+                result += signature_number[j];
+            }
+            start_point[i] = result;
+        }
+        //send the index result to all other nodes
+        for (int target_id = taskid + 1; target_id < taskid + 11; target_id++)
+        {
+            rc = MPI_Send(&signature_number, 500, MPI_LONG, target_id, 1, MPI_COMM_WORLD);
+            if (rc != MPI_SUCCESS)
+                printf("%d: Send failure\n", taskid);
+            rc = MPI_Send(&start_point, 500, MPI_LONG, target_id, 2, MPI_COMM_WORLD);
+            if (rc != MPI_SUCCESS)
+                printf("%d: Send failure\n", taskid);
+        }
+    }
+    else
+    {
+        //other nodes receiving result from head nodes
+        rc = MPI_Recv(&signature_number, 500, MPI_LONG, taskid - (taskid % 12),
+                      1, MPI_COMM_WORLD, &status);
+        if (rc != MPI_SUCCESS)
+            printf("%d: Receive failure\n", taskid);
+        rc = MPI_Recv(&start_point, 500, MPI_LONG, taskid - (taskid % 12),
+                      2, MPI_COMM_WORLD, &status);
+        if (rc != MPI_SUCCESS)
+            printf("%d: Receive failure\n", taskid);
+    }
+
+    printf("Rank %d memory allocation done!", taskid);
+    MPI_Barrier(MPI_COMM_WORLD);
+
     if (taskid == 0)
     {
         for (int col = 0; col < 500; col++)
@@ -110,7 +135,7 @@ int main(void)
     else
     {
         int col_each_task = (int)(500 / numtasks) + 1;
-        for (int col = (taskid - 1) * col_each_task; col < taskid * col_each_task && col < 500; i++)
+        for (int col = (taskid - 1) * col_each_task; col < taskid * col_each_task && col < 500; col++)
         {
             long signature_num_this_col = signature_number[col];
             long *signatures = new long[signature_num_this_col];     //signatures of all rows in a one-dimensinal array
@@ -118,10 +143,10 @@ int main(void)
             int *signatures_two = new int[signature_num_this_col];   //record the second element of each block
             int *signatures_three = new int[signature_num_this_col]; //record the third element of each block
             int *signatures_four = new int[signature_num_this_col];  //record the fourth element of each block
-            calcSignatures(col, signatures, signatures_one, signatures_two, , signatures_three, signatures_four);
+            calcSignatures(col, signatures, signatures_one, signatures_two, signatures_three, signatures_four);
         }
     }
-    MPI_finalize();
+    MPI_Finalize();
     //omp section ends, all signatures are calculated into an array
     printf("%d columns have blocks, total block number is %ld\n", total_col_has_blocks, total_block_number);
     fprintf(log_txt, "%d columns have blocks, total block number is %ld\n", total_col_has_blocks, total_block_number);
@@ -141,72 +166,71 @@ int main(void)
             quicksort(signatures, omp_get_thread_num() * interval, (omp_get_thread_num() + 1) * interval - 1);
         }
     }
-}
-printf("All sections are sorted, start to merge...\n");
-fprintf(log_txt, "All sections are sorted, start to merge...\n");
-//merging sorted child arrays of signatures
-int indexes[1000] = {0};
-int i = 0;
-while (i < total_block_number)
-{
-    long min_value = signatures[indexes[0]];
-    int cur_min_index = 0;
-    for (int core = 1; core < core_number; core++)
+    printf("All sections are sorted, start to merge...\n");
+    fprintf(log_txt, "All sections are sorted, start to merge...\n");
+    //merging sorted child arrays of signatures
+    int indexes[1000] = {0};
+    int i = 0;
+    while (i < total_block_number)
     {
-        if (min_value > signatures[indexes[core]])
+        long min_value = signatures[indexes[0]];
+        int cur_min_index = 0;
+        for (int core = 1; core < core_number; core++)
         {
-            min_value = signatures[indexes[core]];
-            cur_min_index = core;
-        }
-    }
-    if (min_value != 0)
-    {
-        i++;
-        sorted_signatures[i] = min_value;
-    }
-    indexes[cur_min_index] += 1;
-}
-printf("Quick sorting finished! \n\nStart collision detecting...\n");
-fprintf(log_txt, "Quick sorting finished! \n\nStart collision detecting...\n");
-//compare sorted signatures, if they are equal then collisions are detected.
-i = 0;
-while (i < total_block_number)
-{
-    // if the adjacent signatures are the same and their corresponding columns are different, a collision is found
-    if (sorted_signatures[i] == sorted_signatures[i + 1] && correspond_col[i] != correspond_col[i + 1])
-    {
-        int collision_cols[20] = {0};             //a temporary array for storing the collision columns
-        collision_cols[0] = sorted_signatures[i]; //initialize collision columns array with the first element
-        int collision_cols_index = 1;             //the number of collision columns
-        int last_same_index = i + 1;              //the last index that has the same signature of index i.
-        fprintf(result_txt, "Signature %ld -- block: M%d ,M%d, M%d, M%d -- collisions in columns: %d ", sorted_signatures[i], signatures_one[i], signatures_two[i], signatures_three[i], signatures_four[i], correspond_col[i]);
-        while (sorted_signatures[i] == sorted_signatures[last_same_index])
-        //calculate the last_same_index and print out the columns that have collisions but not stored yet
-        {
-            if (correspond_col[i] != correspond_col[last_same_index] && isInArray(collision_cols, correspond_col[last_same_index]) == 0)
+            if (min_value > signatures[indexes[core]])
             {
-                collision_cols[collision_cols_index] = correspond_col[last_same_index];
-                collision_cols_index += 1;
-                fprintf(result_txt, "%d ", correspond_col[last_same_index]);
+                min_value = signatures[indexes[core]];
+                cur_min_index = core;
             }
-            last_same_index += 1;
         }
-        collision_number += 1;
-        fprintf(result_txt, "\n");
-        i = last_same_index;
+        if (min_value != 0)
+        {
+            i++;
+            sorted_signatures[i] = min_value;
+        }
+        indexes[cur_min_index] += 1;
     }
-    else
+    printf("Quick sorting finished! \n\nStart collision detecting...\n");
+    fprintf(log_txt, "Quick sorting finished! \n\nStart collision detecting...\n");
+    //compare sorted signatures, if they are equal then collisions are detected.
+    i = 0;
+    while (i < total_block_number)
     {
-        i += 1;
+        // if the adjacent signatures are the same and their corresponding columns are different, a collision is found
+        if (sorted_signatures[i] == sorted_signatures[i + 1] && correspond_col[i] != correspond_col[i + 1])
+        {
+            int collision_cols[20] = {0};             //a temporary array for storing the collision columns
+            collision_cols[0] = sorted_signatures[i]; //initialize collision columns array with the first element
+            int collision_cols_index = 1;             //the number of collision columns
+            int last_same_index = i + 1;              //the last index that has the same signature of index i.
+            fprintf(result_txt, "Signature %ld -- block: M%d ,M%d, M%d, M%d -- collisions in columns: %d ", sorted_signatures[i], signatures_one[i], signatures_two[i], signatures_three[i], signatures_four[i], correspond_col[i]);
+            while (sorted_signatures[i] == sorted_signatures[last_same_index])
+            //calculate the last_same_index and print out the columns that have collisions but not stored yet
+            {
+                if (correspond_col[i] != correspond_col[last_same_index] && isInArray(collision_cols, correspond_col[last_same_index]) == 0)
+                {
+                    collision_cols[collision_cols_index] = correspond_col[last_same_index];
+                    collision_cols_index += 1;
+                    fprintf(result_txt, "%d ", correspond_col[last_same_index]);
+                }
+                last_same_index += 1;
+            }
+            collision_number += 1;
+            fprintf(result_txt, "\n");
+            i = last_same_index;
+        }
+        else
+        {
+            i += 1;
+        }
     }
-}
-//collision detection finishes.
-printf("%ld collisions are detected.\n", collision_number);
-fprintf(log_txt, "%ld collisions are detected.\n", collision_number);
-printf("\nLogs are recorded in the log.txt file.\n");
-printf("Collisions are recorded in the result.txt file.\n");
-fclose(result_txt);
-fclose(log_txt);
+    //collision detection finishes.
+    printf("%ld collisions are detected.\n", collision_number);
+    fprintf(log_txt, "%ld collisions are detected.\n", collision_number);
+    printf("\nLogs are recorded in the log.txt file.\n");
+    printf("Collisions are recorded in the result.txt file.\n");
+    fclose(result_txt);
+    fclose(log_txt);
 }
 
 void calcSignatures(int col, long *signatures, int *signatures_one, int *signatures_two, int *signatures_three, int *signatures_four)
@@ -253,10 +277,10 @@ void calcSignatures(int col, long *signatures, int *signatures_one, int *signatu
                         for (int z = y + 1; col_neighbours[row][z] > 0; z++)
                         {
                             signatures[index] = getOneSignature(row, col_neighbours[row][x], col_neighbours[row][y], col_neighbours[row][z]);
-                            signatures_one[index] = one;
-                            signatures_two[index] = two;
-                            signatures_three[index] = three;
-                            signatures_four[index] = four;
+                            signatures_one[index] = row;
+                            signatures_two[index] = col_neighbours[row][x];
+                            signatures_three[index] = col_neighbours[row][y];
+                            signatures_four[index] = col_neighbours[row][z];
                             index += 1;
                         }
                     }
@@ -330,7 +354,6 @@ void allocateMemory(int col)
                 }
             }
         }
-        printf("Allocate memory for column %d\n", col);
     }
     signature_number[col] = index;
 }
