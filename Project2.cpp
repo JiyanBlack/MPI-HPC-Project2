@@ -2,16 +2,16 @@
 //YanJi, 21824073, CITS5507
 //JuanLu, 21691401, CITS3402
 
-//Compile with g++ -fopenmp project1.cpp
+//Compile with "mpic++ -fopenmp -o Project2.out Project2.cpp"
+// or Run with "./run.sh {filename} {Node number}"
+// Example: ./run.sh Project2.cpp 29
 
-//Results are recorded in the result.txt file. Logs are in the log.txt file.
+//Results are display on the standart out(terminal)
 
 //References:
 //http://stackoverflow.com/questions/3501338/c-read-file-line-by-line
 //http://stackoverflow.com/questions/4513316/split-string-in-c-every-white-space
 //https://gist.github.com/codeblocks/952063
-
-//send (data[500][4400], keys[4400]),
 
 #include <stdio.h>
 #include <stdlib.h>
