@@ -19,7 +19,7 @@ within a relatively small time duration.
 Spatial locality refers to the use of data elements within relatively close storage locations. 
 
 ### Lecture 3
-1. Compile OpenMP: gcc -fopenmp code.c
+1. Compile OpenMP: gcc -fopenmp code.c ; omp_set_num_threads(4);
 2. Hyperthreading: A physical core is treated as two logical cores to maximum the efficiency. 
 If a thread is in idle state, the core switch to execute an other thread.
 This may reduce the multiple-threads architecture programs.
