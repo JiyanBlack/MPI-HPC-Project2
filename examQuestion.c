@@ -3,13 +3,13 @@
 
 int main()
 {
-	//samle array
-	static int array[100];
-	array[0]=10;
-	array[1]=170;
-	array[2]=150;
-	array[3]=-6;
-	array[4]=5;
+    //samle array
+    static int array[100];
+    array[0]=10;
+    array[1]=170;
+    array[2]=150;
+    array[3]=-6;
+    array[4]=5;
     //array stores the local max/min values
     int local_max[4];
     int local_min[4];
