@@ -37,4 +37,5 @@ This may reduce the multiple-threads architecture programs.
 14. #pragma omp for private(variable): the value is uninitialized
 15. firstprivate(variable): with the corresponding original value
 16. lastprivate(variable): defined as the value of its last sequential iteration
-17. Data sharing: 
+
+### MPI
