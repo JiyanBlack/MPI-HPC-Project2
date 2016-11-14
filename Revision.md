@@ -1,3 +1,9 @@
+### Last Lecture Video:
+1. 5 questions, each 10 points;
+2. Three types of questions: conceptual questions, codes correction/completion/intepretation/output, 
+write code to solve a question.
+3. Data parallelism: SPMD, data(variables) are local to different threads. Each thread wil change 
+and have its own data.
 
 ### Lecture 1
 1. Concurrency: Concurrency is the simultaneous execution of multiple tasks. It can be logical or physical.
@@ -18,8 +24,9 @@ Temporal locality refers to the reuse of specific data, and/or resources,
 within a relatively small time duration. 
 Spatial locality refers to the use of data elements within relatively close storage locations. 
 
-### Lecture 3
-1. Compile OpenMP: gcc -fopenmp code.c ; omp_set_num_threads(4);
+
+### OpenMP
+1. Compile OpenMP: `gcc -fopenmp code.c` ; `omp_set_num_threads(4);`
 2. Hyperthreading: A physical core is treated as two logical cores to maximum the efficiency. 
 If a thread is in idle state, the core switch to execute an other thread.
 This may reduce the multiple-threads architecture programs.
