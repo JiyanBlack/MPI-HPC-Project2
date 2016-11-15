@@ -71,8 +71,31 @@ in the group associated with a communicator. MPI_COMM_WORLD is a default group t
 8. TAG is used to identify the message from sender to receivers. (MPI_ANY_TAG)
 9. MPI_SEND (start_memory_address, memory_length, dataType, dest_rank in the communicator, tag, communicator)
 example:
-```c
-rc=MPI_SEND(&array,array_length,MPI_INT,1,1,MPI_COMM_WORLD);
+`
+int rc;
+rc=MPI_Send(&array,array_length,MPI_INT,1,MPI_ANY_TAG,MPI_COMM_WORLD);
 if (rc != MPI_SUCCESS){...}
-```
-9. 
+`
+10. MPI_RECV(start, count, datatype, source, tag, comm, status)
+`MPI_Status status;
+rc=MPI_Recv(&local_array,array_length,MPI_INT, MPI_ANY_SOURCE, MPI_COMM_WORLD, status);
+`
+11. Basic API
+  * MPI_Init(null,null);
+  * MPI_Finalize();
+  * MPI_Comm_size(MPI_COMM_WORLD,worldsize);
+  * MPI_Comm_rank(MPI_COMM_WORLD, rank);
+12. MPI_Bcast -- broadcast data from one process to others
+13. MPI_Reduce -- combines data from other processes into one process
+14. In concurrent computing, a deadlock is a state in which each member of a group of actions, is waiting for some other member to release a lock. As a result, every process is waiting for others and no progress is made.
+15. Compile: mpicc -fopenmp code.c
+16.When to use MPI: 
+  * Portability and Performance
+  * Irregular Data Structures
+  * Building tools for others(libraries,crosslanguage)
+  * Need to manage memory per processor
+17. When not to use MPI:
+  * Regular computation matches HPF
+  * Solution already exists
+  * Require fault tolerance
+  * Distributed Computing
