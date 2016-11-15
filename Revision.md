@@ -57,14 +57,15 @@ This may reduce the multiple-threads architecture programs.
 4. SPMD: single program multiple data. It is quivalent to MIMD, since multiple instructions can be stored in single program.
 5. Message passing and MPI is for MIMD/SPMD parallelism.
 6. Program structure:
-```c
+`
 int rank, size;
 MPI_Init(null, null);
 MPI_Comm_rank( MPI_COMM_WORLD, &rank );
 MPI_Comm_size( MPI_COMM_WORLD, &size );
 printf( "I am %d of %d\n", rank, size );
 MPI_Finalize();
-return 0;```
+return 0;
+`
 7. Processes can be collected into groups. Each message is sent in a context and must be received in
 the same context. A group and context together form a communicator. A process is identified by its rank
 in the group associated with a communicator. MPI_COMM_WORLD is a default group that has all processes.
