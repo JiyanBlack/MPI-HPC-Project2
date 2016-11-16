@@ -121,7 +121,7 @@ A communicator is either intra or inter, never both.
  * The original MPI standard did not allow for collective communication across intercommunicators
 MPI-2 introduced this capability
 Useful in pipelined algorithms where data needs to be moved from one group of processes to another.
-* Rooted:
+ * Rooted:
 One group (root group) contains the root process while the other group (leaf group) has no root
 Data moves from the root to all the processes in the leaf group (one-to-all) or vice-versa (all-to-one)
 The root process uses MPI_ROOT for its root argument while all other processes in the root group pass MPI_PROC_NULL
