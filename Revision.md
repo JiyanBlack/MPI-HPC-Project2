@@ -100,3 +100,29 @@ rc=MPI_Recv(&local_array,array_length,MPI_INT, MPI_ANY_SOURCE, MPI_COMM_WORLD, s
   * Solution already exists
   * Require fault tolerance
   * Distributed Computing
+
+### Conceptual Understanding
+##### Communicators and groups
+ * A communicator can be a group of ordered processes, each process with a rank number.
+ * Groups allow collective operations to work on a subset of processes.
+ * Information can be added into communicators to be used by the processes in the communicators.
+ * Communicator access operations are local, thus requiring no interprocess communication
+Communicator constructors are collective and may require interprocess communication
+All the routines in this section are for intracommunicators, intercommunicators will be covered separately
+ * Intracommunicator: communicator within a group. Intercommunicator: communicator between a group.
+ * Intracommunicator create: MPI_COMM_CREATE. This is a collective routine, meaning it must be called by all processes in the group associated with commThis routine creates a new communicator which is associated with groupMPI_COMM_NULL is returned to processes not in groupAll group arguments must be the same on all calling processesgroup must be a subset of the group associated with comm.
+ * Destructors: Groups/communicator number is limited. MPI_Group/Comm_Free()..
+ * Intercommunicators are associated with 2 groups of disjoint processes
+Intercommunicators are associated with a remote group and a local group
+The target process (destination for send, source for receive) is its rank in the remote group
+A communicator is either intra or inter, never both.
+
+##### Extended Collective Communication
+ * The original MPI standard did not allow for collective communication across intercommunicators
+MPI-2 introduced this capability
+Useful in pipelined algorithms where data needs to be moved from one group of processes to another.
+* Rooted:
+One group (root group) contains the root process while the other group (leaf group) has no root
+Data moves from the root to all the processes in the leaf group (one-to-all) or vice-versa (all-to-one)
+The root process uses MPI_ROOT for its root argument while all other processes in the root group pass MPI_PROC_NULL
+All processes in the leaf group pass the rank of the root relative to the root group.
